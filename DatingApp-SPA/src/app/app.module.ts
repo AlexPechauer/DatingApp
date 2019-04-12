@@ -8,7 +8,7 @@ import {NgxGalleryModule} from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from 'time-ago-pipe';
 
-import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule} from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule, ModalModule} from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -36,6 +36,10 @@ import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/hasRole.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { AdminService } from './_services/admin.service';
+import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 
 
 
@@ -59,7 +63,10 @@ export function tokenGetter() {
       TimeAgoPipe,
       MemberMessagesComponent,
       AdminPanelComponent,
-      HasRoleDirective
+      HasRoleDirective,
+      UserManagementComponent,
+      PhotoManagementComponent,
+      RolesModalComponent
    ],
    imports: [
       BrowserModule,
@@ -71,6 +78,7 @@ export function tokenGetter() {
       PaginationModule.forRoot(),
       TabsModule.forRoot(),
       ButtonsModule.forRoot(),
+      ModalModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       NgxGalleryModule,
       FileUploadModule,
@@ -93,8 +101,14 @@ export function tokenGetter() {
       MemberListResolver,
       MemberEditResolver,
       ListsResolver,
-      MessagesResolver
+      MessagesResolver,
+      AdminService
    ],
+
+   entryComponents: [
+      RolesModalComponent
+   ],
+
    bootstrap: [
       AppComponent
    ]
