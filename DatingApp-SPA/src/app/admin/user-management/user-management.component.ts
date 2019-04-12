@@ -15,7 +15,7 @@ export class UserManagementComponent implements OnInit {
   users: User[];
   bsModalRef: BsModalRef;
 
-  constructor(private adminService: AdminService, 
+  constructor(private adminService: AdminService,
     private modalService: BsModalService) { }
 
   ngOnInit() {
@@ -38,13 +38,13 @@ export class UserManagementComponent implements OnInit {
     this.bsModalRef = this.modalService.show(RolesModalComponent, {initialState});
     this.bsModalRef.content.updateSelectedRoles.subscribe((values) => {
       const rolesToUpdate = {
-        rolesNames: [...values.filter(el => el.checked === true)].map(el => el.name)]
+        rolesNames: [...values.filter(el => el.checked === true).map(el => el.name)]
       };
       if (rolesToUpdate) {
         this.adminService.updateUserRoles(user, rolesToUpdate).subscribe(() => {
           user.roles = [...rolesToUpdate.rolesNames];
         }, error => {
-          console.log(error)
+          console.log(error);
         });
       }
     });
